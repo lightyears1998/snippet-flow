@@ -1,6 +1,10 @@
 # snippet-flow
 
-1. LowDB
-2. RichText Editor with Code Highlight
+Start from a very basic framework.
 
-Reference: <http://typecho.org/>
+## Reference
+
+Code Editor
+
+1. <https://github.com/microsoft/monaco-editor>
+2. CodeMirror

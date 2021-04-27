@@ -1,0 +1,23 @@
+app:
+  host: localhost
+  port: 4000
+  proxy: false # 若 HTTP Proxy Headers 可信，则可设置 `proxy` 为 `true`。
+  secret: null
+  session:
+    key: snippet-flow
+  authorizationCode: 434002a1-4c2f-4034-b33e-3a9c03a8c4a0 # 用户注册时使用
+
+query:
+  complexity-limit: 65535
+
+redis:
+  host: localhost
+  port: 6379
+  password: null
+
+mysql:
+  host: localhost
+  port: 3306
+  username: snippet
+  password: pa$$w0rd
+  database: snippet
