@@ -5,10 +5,12 @@ import {
   Field, ID, ObjectType
 } from "type-graphql";
 
-@ObjectType({ description: "用户" })
+import { Node } from "./Node";
+
+@ObjectType({ description: "用户", implements: Node })
 @Entity()
 @Unique("UNIQUE_username", ["username"])
-export class User {
+export class User extends Node {
   @Field(() => ID)
   @PrimaryGeneratedColumn("increment")
   userId!: string

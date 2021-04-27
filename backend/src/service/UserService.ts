@@ -8,7 +8,17 @@ import { UserRepository } from "../repo";
 @Service()
 export class UserService {
   @InjectRepository()
-  private readonly userRepository!: UserRepository
+  readonly userRepository!: UserRepository
+
+  async findUserByUserId(userId: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ userId });
+  }
+
+  async listUsers(skip: number, take: number): Promise<{ users: User[], total: number }> {
+    const users = await this.userRepository.find({ skip, take });
+    const total = await this.userRepository.count();
+    return { users, total };
+  }
 
   async createUser(username: string, password: string): Promise<User> {
     const user = this.userRepository.create({ username, passwordHash: await this.hashPassword(password) });
