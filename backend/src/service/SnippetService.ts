@@ -27,7 +27,6 @@ export class SnippetService {
   }
 
   async removeSnippets(snippetId: string[]): Promise<string[]> {
-    console.log(snippetId);
     const snippets = await this.snippetRepository.find({ where: { snippetId: In(snippetId) } });
     const removedId = snippets.map(snippet => snippet.id);
     await this.snippetRepository.remove(snippets);
