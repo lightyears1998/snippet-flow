@@ -13,6 +13,8 @@ extends:
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+exclude:
+  - *.js
 rules:
   indent:
     - warn
