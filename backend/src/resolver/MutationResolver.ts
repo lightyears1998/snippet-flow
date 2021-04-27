@@ -1,6 +1,8 @@
 import { Mutation, Resolver } from "type-graphql";
 
-import { SnippetMutations, UserMutations } from "../type";
+import {
+  PostMutations, SnippetMutations, UserMutations
+} from "../type";
 
 @Resolver()
 export class MutationResolver {
@@ -12,5 +14,10 @@ export class MutationResolver {
   @Mutation()
   snippet(): SnippetMutations {
     return new SnippetMutations();
+  }
+
+  @Mutation()
+  post(): PostMutations {
+    return new PostMutations();
   }
 }

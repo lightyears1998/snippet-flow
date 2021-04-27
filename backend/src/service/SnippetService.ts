@@ -26,10 +26,10 @@ export class SnippetService {
     return this.snippetRepository.save(snippet);
   }
 
-  async removeSnippets(snippetId: string[]): Promise<string[]> {
-    const snippets = await this.snippetRepository.find({ where: { snippetId: In(snippetId) } });
-    const removedId = snippets.map(snippet => snippet.id);
+  async removeSnippets(snippetIds: string[]): Promise<string[]> {
+    const snippets = await this.snippetRepository.find({ where: { snippetId: In(snippetIds) } });
+    const removedIds = snippets.map(snippet => snippet.id);
     await this.snippetRepository.remove(snippets);
-    return removedId;
+    return removedIds;
   }
 }

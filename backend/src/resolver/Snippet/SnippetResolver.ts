@@ -16,7 +16,7 @@ export class SnippetResolver {
 
   @FieldResolver(() => ID)
   id(@Root() snippet: Snippet): string {
-    return this.nodeService.getIdForNode(Snippet, snippet.id);
+    return this.nodeService.getIdForNode(Snippet, snippet.snippetId);
   }
 
   @Query(() => Snippet, { nullable: true })
