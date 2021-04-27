@@ -13,8 +13,8 @@ extends:
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
-exclude:
-  - *.js
+ignorePatterns:
+  - "jest.config.js"
 rules:
   indent:
     - warn
