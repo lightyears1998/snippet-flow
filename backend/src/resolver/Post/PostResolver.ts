@@ -20,7 +20,7 @@ export class PostResolver {
   }
 
   @Query(() => Post, { nullable: true })
-  snippet(@Arg("postId") postId: string): Promise<Post | undefined> {
+  post(@Arg("postId") postId: string): Promise<Post | undefined> {
     return this.postService.findPostByPostId(postId);
   }
 }
