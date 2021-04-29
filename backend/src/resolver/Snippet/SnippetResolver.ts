@@ -23,4 +23,9 @@ export class SnippetResolver {
   snippet(@Arg("snippetId") snippetId: string): Promise<Snippet | undefined> {
     return this.snippetService.findSnippetBySnippetId(snippetId);
   }
+
+  @Query(() => Snippet, { nullable: true })
+  snippets(@Arg("snippetId") snippetId: string): Promise<Snippet | undefined> {
+    return this.snippetService.findSnippetBySnippetId(snippetId);
+  }
 }
