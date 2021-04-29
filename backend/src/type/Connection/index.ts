@@ -1,2 +1,3 @@
 export * from "./Connection";
-export * from "./UserConnection";
+export * from "./UsersConnection";
+export * from "./PostsConnection";

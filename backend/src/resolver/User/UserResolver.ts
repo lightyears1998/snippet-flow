@@ -29,7 +29,7 @@ export class UserResolver {
   }
 
   @Query(() => Boolean)
-  async usernameAvalability(@Arg("username") username: string): Promise<boolean> {
+  async usernameAvailability(@Arg("username") username: string): Promise<boolean> {
     return (await this.userService.userRepository.findByUsername(username)) !== undefined;
   }
 

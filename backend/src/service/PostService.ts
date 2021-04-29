@@ -13,6 +13,12 @@ export class PostService {
     return this.postRepository.findOne({ where: { postId } });
   }
 
+  async listPosts(skip: number, take: number): Promise<{ posts: Post[], total: number }> {
+    const posts = await this.postRepository.find({ skip, take });
+    const total = await this.postRepository.count();
+    return { posts, total };
+  }
+
   async loadPost(postId: string): Promise<Post> {
     return this.postRepository.findOneOrFail({ where: { postId } });
   }
