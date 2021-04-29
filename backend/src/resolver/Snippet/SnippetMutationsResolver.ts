@@ -5,8 +5,8 @@ import { Inject } from "typedi";
 
 import { Snippet } from "../../entity";
 import { SnippetService } from "../../service";
-import { SnippetMutations } from "../../type";
 
+import { SnippetMutations } from "./type";
 import { CreateSnippetInput, UpdateSnippetInput } from "./type";
 
 @Resolver(() => SnippetMutations)

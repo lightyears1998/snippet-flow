@@ -2,7 +2,7 @@ import { Mutation, Resolver } from "type-graphql";
 
 import {
   PostMutations, SnippetMutations, UserMutations
-} from "../type";
+} from ".";
 
 @Resolver()
 export class MutationResolver {

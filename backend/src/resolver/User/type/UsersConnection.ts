@@ -1,9 +1,8 @@
 import { Field, ObjectType } from "type-graphql";
 
-import { User } from "../../entity";
-import { OffsetBasedPageInfo } from "../PageInfo";
-
-import { OffsetBasedConnection } from "./Connection";
+import { User } from "../../../entity";
+import { OffsetBasedPageInfo } from "../../PageInfo/type";
+import { OffsetBasedConnection } from "../../Connection";
 
 @ObjectType()
 export class UsersConnection implements OffsetBasedConnection {

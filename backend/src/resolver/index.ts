@@ -1,4 +1,4 @@
+export * from "./PageInfo";
 export * from "./User";
-export * from "./NodeResolver";
-export * from "./MutationResolver";
-export * from "./OffsetBasedPageInfoResolver";
+export * from "./Post";
+export * from "./Snippet";

@@ -2,7 +2,7 @@ import {
   ResolverInterface, Root, Resolver, FieldResolver
 } from "type-graphql";
 
-import { OffsetBasedPageInfo } from "../type";
+import { OffsetBasedPageInfo } from "./type";
 
 @Resolver(() => OffsetBasedPageInfo)
 export class OffsetBasedPageInfoResolver implements ResolverInterface<OffsetBasedPageInfo> {

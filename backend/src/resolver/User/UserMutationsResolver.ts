@@ -9,7 +9,8 @@ import { User } from "../../entity";
 import { AppContext, AppUserContext } from "../../context";
 import { UserRepository } from "../../repo";
 import { UserService } from "../../service";
-import { UserMutations } from "../../type";
+
+import { UserMutations } from "./type";
 
 @Resolver(() => UserMutations)
 export class UserMutationsResolver {

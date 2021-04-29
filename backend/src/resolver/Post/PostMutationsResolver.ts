@@ -5,8 +5,8 @@ import { Inject } from "typedi";
 
 import { Post } from "../../entity";
 import { PostService } from "../../service";
-import { PostMutations } from "../../type";
 
+import { PostMutations } from "./type";
 import { CreatePostInput, UpdatePostInput } from "./type";
 
 @Resolver(() => PostMutations)

@@ -5,7 +5,8 @@ import { Inject } from "typedi";
 
 import { Post, PostChildrenUnion } from "../../entity";
 import { NodeService, PostService } from "../../service";
-import { PostsConnection } from "../../type";
+
+import { PostsConnection } from "./type";
 
 @Resolver(() => Post)
 export class PostResolver implements ResolverInterface<Post> {

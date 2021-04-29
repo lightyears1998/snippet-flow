@@ -5,9 +5,10 @@ import { Inject } from "typedi";
 
 import { User } from "../../entity";
 import { AppUserContext } from "../../context";
-import { UsersConnection } from "../../type";
 import { NodeService } from "../../service/NodeService";
 import { UserService } from "../../service";
+
+import { UsersConnection } from "./type";
 
 @Resolver(() => User)
 export class UserResolver {
