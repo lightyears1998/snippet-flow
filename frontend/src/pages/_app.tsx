@@ -12,8 +12,10 @@ import {
   ConfigKey, getConfig, saveConfig
 } from "../lib/config";
 
+const defaultServerUri = "https://snippet.qfstudio.net/graphql";
+
 const apolloClientSettings: ApolloClientOptions<NormalizedCacheObject> = {
-  uri: "https://primum.qfstudio.net/graphql",
+  uri: defaultServerUri,
   cache: new InMemoryCache(),
   credentials: "include"
 };
@@ -28,7 +30,7 @@ export default function MyApp(props: AppProps): JSX.Element {
     }
   }, []);
 
-  const [apolloClient, setApolloClient] = React.useState(new ApolloClient(apolloClientSettings));
+  const [apolloClient, setApolloClient] = React.useState<ApolloClient<NormalizedCacheObject>>(null);
 
   React.useEffect(() => {
     const uri = String(getConfig(ConfigKey.SERVER_URL));
@@ -36,7 +38,7 @@ export default function MyApp(props: AppProps): JSX.Element {
       Object.assign(apolloClientSettings, { uri });
       setApolloClient(new ApolloClient(apolloClientSettings));
     } else {
-      const defaultUri = "https://primum.qfstudio.net/graphql";
+      const defaultUri = defaultServerUri;
       saveConfig(ConfigKey.SERVER_URL, defaultUri);
     }
   }, []);
@@ -50,9 +52,11 @@ export default function MyApp(props: AppProps): JSX.Element {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        {
+          apolloClient && <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        }
       </ThemeProvider>
     </React.Fragment>
   );

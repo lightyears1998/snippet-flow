@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) =>
 export default function HomePage(): JSX.Element {
   const classes = useStyles({});
 
-  const [remoteUrl, setRemoteUrl] = useState("https://primum.qfstudio.net");
+  const [remoteUrl, setRemoteUrl] = useState("https://snippet.qfstudio.net/graphql");
   const [user, setUser] = useState<User>(null);
 
   useEffect(() => {

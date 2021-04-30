@@ -27,7 +27,7 @@ export const Post = ({ postId, level = 0 }: PostProps) => {
   }
 
   if (level > 5) {
-    return <p><a href={`/post/${postId}`}>Open post in new tab.</a></p>;
+    return <p><a href={`/post/${postId}`}>Open Post in a new tab.</a></p>;
   }
 
   const post = data.post;
