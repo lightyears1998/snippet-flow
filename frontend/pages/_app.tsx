@@ -46,7 +46,7 @@ export default function MyApp(props: AppProps): JSX.Element {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-        <title>Day Primer</title>
+        <title>Snippet Flow</title>
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />

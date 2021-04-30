@@ -1,15 +1,11 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
+import { Post } from "@/components/Post";
 
 const PostPage = () => {
-  const router = useRouter()
-  let { postId } = router.query as unknown as { postId: number }
-  postId = Number(postId)
+  const router = useRouter();
+  const { postId } = router.query as { postId: string };
 
-  if (!postId) {
-    Router.push('/')
-  }
-
-  return <p>{postId}</p>
-}
+  return <Post postId={postId} level={0}></Post>;
+};
 
 export default PostPage;

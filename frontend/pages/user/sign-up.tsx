@@ -4,7 +4,7 @@ export default function RegisterPage(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Day Primer | 用户注册</title>
+        <title>Snippet Flow | 注册</title>
       </Head>
       <div>
 
