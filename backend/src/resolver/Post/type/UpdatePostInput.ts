@@ -10,6 +10,6 @@ export class UpdatePostInput implements Partial<Post> {
   @Field()
   headline!: string
 
-  @Field()
-  childrenIds!: string
+  @Field(() => [String])
+  childrenIds!: string[]
 }

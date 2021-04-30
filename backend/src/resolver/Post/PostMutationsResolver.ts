@@ -30,7 +30,8 @@ export class PostMutationsResolver {
   ): Promise<Post> {
     const { postId } = input;
     const post = await this.postService.loadPost(postId);
-    Object.assign(post, input);
+    post.headline = input.headline;
+    post.childrenIdsJSONString = JSON.stringify(input.childrenIds);
     return this.postService.updatePost(post);
   }
 
