@@ -1,5 +1,13 @@
 .headline {
+  display: inline-block;
   background-color: lightcyan;
+}
+
+.headline-toggle-button {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  cursor: pointer;
+  user-select: none;
 }
 
 .children {

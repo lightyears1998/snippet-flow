@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
+import { useState } from "react";
 
 import { Snippet } from "../Snippet";
 
 import styles from "./Post.module.css";
+import { PostHeadline } from "./PostHeadline";
 
 const POST_QUERY = gql`
   query ($postId: String!) {
@@ -28,6 +30,7 @@ type PostProps = {
 }
 
 export const Post = ({ postId, level = 0 }: PostProps) => {
+  const [expand, setExpand] = useState(level < 2);
   const {
     loading, data, error
   } = useQuery(POST_QUERY, { variables: { postId } });
@@ -48,15 +51,19 @@ export const Post = ({ postId, level = 0 }: PostProps) => {
   const children = post.children;
 
   return (<>
-    <p className={styles.headline}>{post.headline}</p>
-    <div className={styles.children}>
-      {children.map((child) => {
-        if (child.__typename === "Post") {
-          return <Post key={child.id} postId={child.postId} level={level + 1}></Post>;
-        } else if (child.__typename === "Snippet") {
-          return <Snippet key={child.id} snippetId={child.snippetId}></Snippet>;
-        }
-      })}
+    <div>
+      <PostHeadline headline={post.headline} level={level} expand={expand} setExpand={setExpand}></PostHeadline>
     </div>
+    {
+      expand && <div className={styles.children}>
+        {children.map((child) => {
+          if (child.__typename === "Post") {
+            return <Post key={child.id} postId={child.postId} level={level + 1}></Post>;
+          } else if (child.__typename === "Snippet") {
+            return <Snippet key={child.id} snippetId={child.snippetId}></Snippet>;
+          }
+        })}
+      </div>
+    }
   </>);
 };
