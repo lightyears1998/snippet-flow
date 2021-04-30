@@ -4,6 +4,8 @@ env:
 parser: '@typescript-eslint/parser'
 parserOptions:
   project: ./tsconfig.json
+ignorePatterns:
+  - "apollo.config.js"
 plugins:
   - '@typescript-eslint'
   - import

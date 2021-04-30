@@ -1,16 +1,8 @@
 import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
+
+import { QUERY_SNIPPET } from "../../operations/Snippet";
 
 import styles from "./Snippet.module.css";
-
-const SNIPPET_QUERY = gql`
-  query ($snippetId: String!){
-    snippet(snippetId: $snippetId) {
-      language
-      text
-    }
-  }
-`;
 
 type SnippetProps = {
   snippetId: string
@@ -19,7 +11,7 @@ type SnippetProps = {
 export const Snippet = ({ snippetId }: SnippetProps) => {
   const {
     loading, data, error
-  } = useQuery(SNIPPET_QUERY, { variables: { snippetId: snippetId } });
+  } = useQuery(QUERY_SNIPPET, { variables: { snippetId: snippetId } });
 
   if (loading) {
     return <p>Loading...</p>;

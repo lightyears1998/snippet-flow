@@ -1,28 +1,11 @@
 import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
 import { useState } from "react";
+import { QUERY_POST } from "@/operations/Post";
 
 import { Snippet } from "../Snippet";
 
 import styles from "./Post.module.css";
 import { PostHeadline } from "./PostHeadline";
-
-const POST_QUERY = gql`
-  query ($postId: String!) {
-    post(postId: $postId) {
-      headline
-      children {
-        __typename
-        ... on Post {
-          postId
-        }
-        ... on Snippet {
-          snippetId
-        }
-      }
-    }
-}
-`;
 
 type PostProps = {
   postId: string
@@ -33,7 +16,7 @@ export const Post = ({ postId, level = 0 }: PostProps) => {
   const [expand, setExpand] = useState(level < 2);
   const {
     loading, data, error
-  } = useQuery(POST_QUERY, { variables: { postId } });
+  } = useQuery(QUERY_POST, { variables: { postId } });
 
   if (loading) {
     return <p>Loading...</p>;

@@ -1,0 +1,161 @@
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+union PostChildren = Post | Snippet
+
+type CursorBasedPageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String!
+  endCursor: String!
+}
+
+type OffsetBasedPageInfo {
+  total: Int!
+  skip: Int!
+  take: Int!
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
+type UserMutations {
+  """用户注册"""
+  signUp(
+    """注册授权码"""
+    authorizationCode: String!
+
+    """密码"""
+    password: String!
+
+    """用户名"""
+    username: String!
+  ): User!
+
+  """用户登录"""
+  signIn(password: String!, username: String!): User
+
+  """用户注销"""
+  signOut: Boolean!
+
+  """修改密码"""
+  updatePassword(oldPassword: String!, newPassword: String!): Boolean!
+}
+
+type UsersConnection {
+  nodes: [User!]!
+  pageInfo: OffsetBasedPageInfo!
+}
+
+type PostMutations {
+  """创建组合"""
+  create(input: CreatePostInput!): Post!
+
+  """修改组合"""
+  update(input: UpdatePostInput!): Post!
+
+  """删除组合"""
+  delete(postId: [ID!]!): [ID!]!
+}
+
+type PostsConnection {
+  nodes: [Post!]!
+  pageInfo: OffsetBasedPageInfo!
+}
+
+type SnippetMutations {
+  """创建代码片段"""
+  create(input: CreateSnippetInput!): Snippet!
+
+  """修改代码片段"""
+  update(input: UpdateSnippetInput!): Snippet!
+
+  """删除代码片段"""
+  delete(snippetId: [ID!]!): [ID!]!
+}
+
+type SnippetsConnection {
+  nodes: [Snippet!]!
+  pageInfo: OffsetBasedPageInfo!
+}
+
+interface Node {
+  id: ID!
+}
+
+input CreatePostInput {
+  headline: String!
+  childrenIds: [String!]!
+}
+
+input UpdatePostInput {
+  postId: String!
+  headline: String!
+  childrenIds: [String!]!
+}
+
+input CreateSnippetInput {
+  language: String!
+  text: String!
+}
+
+input UpdateSnippetInput {
+  snippetId: String!
+  language: String!
+  text: String!
+}
+
+"""用户"""
+type User implements Node {
+  id: ID!
+  userId: ID!
+
+  """用户名"""
+  username: String!
+
+  """用户注册日期"""
+  createdAt: DateTime!
+
+  """用户资料更新日期"""
+  updatedAt: DateTime!
+}
+
+"""片段"""
+type Snippet implements Node {
+  id: ID!
+  snippetId: ID!
+  language: String!
+  text: String!
+}
+
+"""组合"""
+type Post implements Node {
+  id: ID!
+  postId: String!
+  headline: String!
+  children: [PostChildren!]!
+}
+
+type Query {
+  """查询用户信息；若用户未登录，将返回 `CLIENT_NOT_LOGIN` 异常。"""
+  me: User!
+  usernameAvailability(username: String!): Boolean!
+  user(userId: String!): User
+
+  """查询用户列表"""
+  users(take: Int = 20, skip: Int = 0): UsersConnection!
+  post(postId: String!): Post
+
+  """列出组合。"""
+  posts(take: Int = 20, skip: Int = 0): PostsConnection!
+  snippet(snippetId: String!): Snippet
+  snippets(take: Int = 20, skip: Int = 0): SnippetsConnection
+  node(id: ID!): Node
+}
+
+type Mutation {
+  user: UserMutations!
+  snippet: SnippetMutations!
+  post: PostMutations!
+}

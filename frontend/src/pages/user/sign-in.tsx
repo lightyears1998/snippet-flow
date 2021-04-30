@@ -11,18 +11,12 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { SIGN_IN } from "@/operations/User";
 
 import Copyright from "../../components/Copyright";
 import { setUser, User } from "../../lib/user";
-
-const SIGN_IN = gql`mutation ($username: String!, $password: String!) {
-  signIn(username: $username, password: $password) {
-    userId
-    username
-  }
-}`;
 
 const useStyles = makeStyles((theme) => ({
   root: { height: "100vh" },

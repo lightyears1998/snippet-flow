@@ -4,20 +4,13 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { DataGrid } from "@material-ui/data-grid";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Divider } from "@material-ui/core";
+import { QUERY_ME } from "@/operations/User";
 
 import Link from "../components/Link";
 import { logout, User } from "../lib/user";
 import { ConfigKey, getConfig } from "../lib/config";
-
-const USER_INFO = gql`query {
-  me {
-    userId
-    username
-  	createdAt
-  }
-}`;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -53,7 +46,7 @@ export default function HomePage(): JSX.Element {
 
   const {
     loading: userInfoLoading, error: userInfoError, data: userInfoData
-  } = useQuery(USER_INFO);
+  } = useQuery(QUERY_ME);
 
   return (
     <React.Fragment>
