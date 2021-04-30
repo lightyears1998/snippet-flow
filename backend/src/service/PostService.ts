@@ -23,8 +23,8 @@ export class PostService {
     return this.postRepository.findOneOrFail({ where: { postId } });
   }
 
-  async createPost(headline: string, childrenIds: string): Promise<Post> {
-    const post = this.postRepository.create({ headline, childrenIds });
+  async createPost(headline: string, childrenIdsJSONString: string): Promise<Post> {
+    const post = this.postRepository.create({ headline, childrenIdsJSONString });
     return this.postRepository.save(post);
   }
 

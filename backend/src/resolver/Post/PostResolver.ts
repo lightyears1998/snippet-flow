@@ -23,9 +23,15 @@ export class PostResolver implements ResolverInterface<Post> {
 
   @FieldResolver(() => PostChildrenUnion)
   async children(@Root() post: Post): Promise<Array<typeof PostChildrenUnion>> {
-    const childrenIds = JSON.parse(post.childrenIds || "[]") as string[];
-    console.log(childrenIds);
-    return [];
+    const childrenIds = JSON.parse(post.childrenIdsJSONString || "[]") as string[];
+
+    const childrenPromise = [] as Promise<typeof PostChildrenUnion | undefined>[];
+    for (const id of childrenIds) {
+      childrenPromise.push(this.nodeService.getNodeById(id) as Promise<typeof PostChildrenUnion | undefined>);
+    }
+    const children = await Promise.all(childrenPromise);
+
+    return children.filter(child => child !== undefined) as Array<typeof PostChildrenUnion>;
   }
 
   @Query(() => Post, { nullable: true })

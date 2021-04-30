@@ -6,8 +6,9 @@ import { Inject } from "typedi";
 import { Post } from "../../entity";
 import { PostService } from "../../service";
 
-import { PostMutations } from "./type";
-import { CreatePostInput, UpdatePostInput } from "./type";
+import {
+  CreatePostInput, PostMutations, UpdatePostInput
+} from "./type";
 
 @Resolver(() => PostMutations)
 export class PostMutationsResolver {
@@ -19,7 +20,7 @@ export class PostMutationsResolver {
   async create(
     @Arg("input") { headline, childrenIds }: CreatePostInput
   ): Promise<Post> {
-    return this.postService.createPost(headline, childrenIds);
+    return this.postService.createPost(headline, JSON.stringify(childrenIds));
   }
 
   @Authorized()

@@ -13,6 +13,12 @@ export class SnippetService {
     return this.snippetRepository.findOne({ where: { snippetId } });
   }
 
+  async listSnippets(skip: number, take: number): Promise<{snippets: Snippet[], total: number}> {
+    const snippets = await this.snippetRepository.find({ skip, take });
+    const total = await this.snippetRepository.count();
+    return { snippets, total };
+  }
+
   async loadSnippet(snippetId: string): Promise<Snippet> {
     return this.snippetRepository.findOneOrFail({ where: { snippetId } });
   }

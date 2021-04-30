@@ -21,8 +21,8 @@ export class Post extends Node {
   @Column()
   headline!: string
 
-  @Column("simple-json", { default: "[]" })
-  childrenIds!: string
+  @Column("text", { default: "[]" })
+  childrenIdsJSONString!: string
 
   @Field(() => [PostChildrenUnion])
   children?: Array<typeof PostChildrenUnion>
