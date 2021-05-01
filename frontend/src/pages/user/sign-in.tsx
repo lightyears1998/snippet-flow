@@ -14,9 +14,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { SIGN_IN } from "@/operations/User";
+import { SignIn } from "@/operations/types";
 
 import Copyright from "../../components/Copyright";
-import { setUser, User } from "../../lib/user";
+import { setUser } from "../../lib/user";
 
 const useStyles = makeStyles((theme) => ({
   root: { height: "100vh" },
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1)
   },
   submit: { margin: theme.spacing(3, 0, 2) }
@@ -51,7 +52,7 @@ export default function SignInPage(): JSX.Element {
   const usernameInput = useRef<HTMLInputElement>();
   const passwordInput = useRef<HTMLInputElement>();
 
-  const [signIn, { loading: signingIn, error: signInError }] = useMutation<{ signIn: User }>(SIGN_IN);
+  const [signIn, { loading: signingIn, error: signInError }] = useMutation<SignIn>(SIGN_IN);
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -70,7 +71,7 @@ export default function SignInPage(): JSX.Element {
             e.preventDefault();
             try {
               const result = await signIn({ variables: { username: usernameInput.current.value, password: passwordInput.current.value } });
-              setUser(result.data.signIn);
+              setUser(result.data.user.signIn);
               router.push("/");
             } catch {}
           }}>

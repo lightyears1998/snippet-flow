@@ -7,9 +7,13 @@ import { DataGrid } from "@material-ui/data-grid";
 import { useQuery } from "@apollo/client";
 import { Divider } from "@material-ui/core";
 import { QUERY_ME } from "@/operations/User";
+import { Me } from "@/operations/types";
 
+import { setUser as saveUserAsConfig } from "../lib/user";
 import Link from "../components/Link";
-import { logout, User } from "../lib/user";
+import {
+  getUser, logout, User
+} from "../lib/user";
 import { ConfigKey, getConfig } from "../lib/config";
 
 const useStyles = makeStyles((theme) =>
@@ -38,15 +42,22 @@ export default function HomePage(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    const user = getConfig(ConfigKey.USER) as User | null;
+    const user = getUser() as User | null;
     if (user) {
       setUser(user);
     }
   }, []);
 
   const {
-    loading: userInfoLoading, error: userInfoError, data: userInfoData
-  } = useQuery(QUERY_ME);
+    loading: userLoading, error: userError, data: userData
+  } = useQuery<Me>(QUERY_ME);
+
+  if (userData) {
+    if (!getUser() || getUser().userId !== userData.me.userId) {
+      saveUserAsConfig(userData.me);
+      setUser(userData.me);
+    }
+  }
 
   return (
     <React.Fragment>
@@ -64,10 +75,10 @@ export default function HomePage(): JSX.Element {
           缓存的凭证：({user.userId}) {user.username}
         </Typography>}
         {
-          userInfoLoading && <Typography gutterBottom>正在加载用户信息。</Typography>
+          userLoading && <Typography gutterBottom>正在加载用户信息。</Typography>
         }
         {
-          userInfoData && <Typography gutterBottom>{JSON.stringify(userInfoData)}</Typography>
+          userData && <Typography gutterBottom>{JSON.stringify(userData)}</Typography>
         }
         {
           user ?

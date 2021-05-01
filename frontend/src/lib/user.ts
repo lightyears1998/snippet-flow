@@ -3,7 +3,7 @@ import {
 } from "./config";
 
 export class User {
-  userId: number
+  userId: string
   username: string
 }
 
