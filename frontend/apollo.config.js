@@ -1,3 +1,5 @@
+// This config is required to use Apollo Codegen feature.
+
 module.exports = {
     client: {
         includes: [
